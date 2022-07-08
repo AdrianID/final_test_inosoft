@@ -18,6 +18,24 @@ import store from './store'
 // files.keys().map(key => Vue.component(key.split('/').pop().split('.')[0], files(key).default))
 
 Vue.component('form-instruction', require('./pages/FormInstruction.vue').default);
+/* import the fontawesome core */
+import { library } from '@fortawesome/fontawesome-svg-core'
+
+/* import font awesome icon component */
+import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
+
+/* add font awesome icon component */
+Vue.component('font-awesome-icon', FontAwesomeIcon)
+
+/* import specific icons */
+import { faPlus } from '@fortawesome/free-solid-svg-icons'
+import { faCircleArrowRight } from '@fortawesome/free-solid-svg-icons'
+import { faTruck } from '@fortawesome/free-solid-svg-icons'
+import { faMinus } from '@fortawesome/free-solid-svg-icons'
+
+/* add icons to the library */
+library.add(faPlus, faCircleArrowRight, faTruck, faMinus)
+
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to

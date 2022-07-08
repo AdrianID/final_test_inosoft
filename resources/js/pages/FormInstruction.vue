@@ -105,7 +105,7 @@
                                 <SelectOption fullwidth v-model="cost_detail.charge_to" :data="select" placeholder="Select Vendor"/>
                             </td>
                             <td class="px-6 py-4 whitespace-nowrap text-gray-900">
-                                <button @click="remove(index)">Remove</button>
+                                <Button small filled @button-click="remove(index)"><font-awesome-icon icon="fa-solid fa-minus"/> </Button>
                             </td>
                     </tr>
 
@@ -129,7 +129,7 @@
                             
                         </td>
                         <td class="px-6 py-4">
-                            <button @click="addRow()">Add</button>
+                            <Button primary small @button-click="addRow()"><font-awesome-icon icon="fa-solid fa-plus"/></Button>
                         </td>
                     </tr>
                 </tbody>
@@ -137,11 +137,9 @@
         </div>
         <div class="mx-auto mt-8">
             <div class="text-right">
-                
-                <button type="button" class="py-2.5 px-5 mr-2 mb-2 text-sm font-medium text-gray-900 focus:outline-none bg-white rounded-lg hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-200 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700">Cancel</button>
-                <button type="button" class="py-2.5 px-5 mr-2 mb-2 text-sm font-medium text-gray-900 focus:outline-none bg-white rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-200 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700">Save As Draft</button>
-                <button type="button" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">Default</button>
-                
+                <Button text large>Cancel</Button>
+                <Button outlined large> Save As Draft </Button>
+                <Button primary large>Submit</Button>
             </div>
         </div>
     </div>
@@ -152,12 +150,14 @@
 import InputText from '../components/InputText.component.vue'
 import InputNumber from '../components/InputNumber.component.vue'
 import SelectOption from '../components/SelectOption.component.vue'
+import Button from '../components/Button.component.vue'
 export default {
     name: 'form-instruction',
     components: {
         InputText,
         InputNumber,
-        SelectOption
+        SelectOption,
+        Button
     },
     data(){
         return{
