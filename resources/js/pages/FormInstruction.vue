@@ -29,12 +29,11 @@
                     </div>
                     <div>
                         <label for="first_name" class="block mb-1 ml-1 text-sm font-medium text-gray-900 dark:text-gray-300">Attention Of</label>
-                        <input type="text" id="first_name" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="John" required>
+                        <InputText v-model="input" placeholder="Enter Attention Of"/>
                     </div>
                     <div>
                         <label for="first_name" class="block mb-1 ml-1 text-sm font-medium text-gray-900 dark:text-gray-300">Quotation No.</label>
-                        <input type="text" id="first_name" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="John" required>
-                    </div>
+                        <InputText v-model="input" placeholder="Enter Attention Of"/></div>
                     <div>
                         <label for="first_name" class="block mb-1 ml-1 text-sm font-medium text-gray-900 dark:text-gray-300">Invoice To</label>
                         <select id="countries" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
@@ -45,7 +44,7 @@
                     </div>
                     <div class="col-span-5">
                         <label for="first_name" class="block mb-1 ml-1 text-sm font-medium text-gray-900 dark:text-gray-300">Vendor Address</label>
-                        <input type="text" id="first_name" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="John" required>
+                        <InputText v-model="input" placeholder="Enter Attention Of"/>
                     </div>
                 </div>
                 <div class="grid  gap-x-2 gap-y-5 grid-cols-1">
@@ -88,11 +87,10 @@
                 <tbody>
                     <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700" v-for="(cost_detail,index) in cost_details" :key="index">
                             <td class="px-6 py-4 whitespace-nowrap text-gray-900">
-                                <input type="text" v-model="cost_detail.description" id="first_name" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="John" required>
-                    
+                                <InputText v-model="cost_detail.description" placeholder="Enter Attention Of"/>
                             </td>    
                             <td class="px-6 py-4 whitespace-nowrap text-gray-900">
-                                <input type="text" v-model="cost_detail.quantity" id="first_name" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="John" required>
+                                <InputNumber v-model="cost_detail.quantity" placeholder="Enter Attention Of"/>
                             </td>
                             <td class="px-6 py-4 whitespace-nowrap text-gray-900">
                                 <select v-model="cost_detail.uom" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-white dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
@@ -101,13 +99,14 @@
                                 </select>
                             </td>
                             <td class="px-6 py-4 whitespace-nowrap text-gray-900">
-                                <input type="text" v-model="cost_detail.unit_price" id="first_name" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="John" required>
+                                <InputNumber v-model="cost_detail.unit_price" placeholder="Enter Attention Of"/>
                             </td>
                             <td class="px-6 py-4 whitespace-nowrap text-gray-900">
-                                <input type="text" v-model="cost_detail.discount" id="first_name" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="John" required>
+                                <InputNumber persen v-model="cost_detail.discount" placeholder="Enter Attention Of"/>
+                            
                             </td>
                             <td class="px-6 py-4 whitespace-nowrap text-gray-900">
-                                <input type="text" v-model="cost_detail.vat" id="first_name" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="John" required>
+                                <InputNumber v-model="cost_detail.vat" placeholder="Enter Attention Of"/>
                             </td>
                             <td class="px-6 py-4 whitespace-nowrap text-gray-900">
                                 <select id="countries" v-model="cost_detail.currency" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
@@ -172,22 +171,30 @@
         </div>
     </div>
     </div>
-
+    
 </template>
 <script>
+import InputText from '../components/InputText.component.vue'
+import InputNumber from '../components/InputNumber.component.vue'
+
 export default {
     name: 'form-instruction',
+    components: {
+        InputText,
+        InputNumber
+    },
     data(){
         return{
+            input: '',
             HeaderTable: ["Description","Qty","UOM","Unit Price","Discount(%)","VAT(%)","Currency","VAT Amount","Sub Total", "Total","Charge To"],
             cost_details:[
                 {
                     description: '',
-                    quantity: '',
+                    quantity: "",
                     uom: '',
-                    unit_price: '',
-                    discount: '',
-                    vat: '',
+                    unit_price: "",
+                    discount: "",
+                    vat: "",
                     currency: '',
                     charge_to: ''
                 }
@@ -204,8 +211,8 @@ export default {
                     quantity: '',
                     uom: '',
                     unit_price: '',
-                    discount: '',
-                    vat: '',
+                    discount: '0',
+                    vat: '0',
                     currency: '',
                     charge_to: ''
                 })
