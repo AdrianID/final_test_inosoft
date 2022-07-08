@@ -38,11 +38,6 @@ export default {
     extrasmall:Boolean,
     large: Boolean,
     fullwidth: Boolean
- },
- data(){
-    return{
-
-    }
  }
 }
 </script>

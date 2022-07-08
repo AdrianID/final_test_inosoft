@@ -17439,9 +17439,6 @@ __webpack_require__.r(__webpack_exports__);
     extrasmall: Boolean,
     large: Boolean,
     fullwidth: Boolean
-  },
-  data: function data() {
-    return {};
   }
 });
 
@@ -17719,11 +17716,9 @@ Vue.component('font-awesome-icon', _fortawesome_vue_fontawesome__WEBPACK_IMPORTE
 
 
 
-
-
 /* add icons to the library */
 
-_fortawesome_fontawesome_svg_core__WEBPACK_IMPORTED_MODULE_1__.library.add(_fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_3__.faPlus, _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_3__.faCircleArrowRight, _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_3__.faTruck, _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_3__.faMinus);
+_fortawesome_fontawesome_svg_core__WEBPACK_IMPORTED_MODULE_1__.library.add(_fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_3__.faPlus, _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_3__.faMinus);
 /**
  * Next, we will create a fresh Vue application instance and attach it to
  * the page. Then, you may begin adding components to this application

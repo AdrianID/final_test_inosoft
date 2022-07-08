@@ -29,12 +29,10 @@ Vue.component('font-awesome-icon', FontAwesomeIcon)
 
 /* import specific icons */
 import { faPlus } from '@fortawesome/free-solid-svg-icons'
-import { faCircleArrowRight } from '@fortawesome/free-solid-svg-icons'
-import { faTruck } from '@fortawesome/free-solid-svg-icons'
 import { faMinus } from '@fortawesome/free-solid-svg-icons'
 
 /* add icons to the library */
-library.add(faPlus, faCircleArrowRight, faTruck, faMinus)
+library.add(faPlus, faMinus)
 
 
 /**
