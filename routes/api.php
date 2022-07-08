@@ -21,3 +21,7 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 Route::get('getUOM','App\Http\Controllers\TransactionController@getUOM');
 Route::get('getCurrency','App\Http\Controllers\TransactionController@getCurrency');
 Route::get('getChargeTo','App\Http\Controllers\TransactionController@getChargeTo');
+
+Route::get('getVendor','App\Http\Controllers\VendorController@getVendor');
+Route::get('getInvoiceTo','App\Http\Controllers\VendorController@getInvoiceTo');
+Route::get('getCustomer','App\Http\Controllers\VendorController@getCustomer');
