@@ -21,11 +21,7 @@
                 <div class="grid gap-x-2 gap-y-5 pr-2 grid-cols-5 col-span-4" style="border-right: 1px dashed #bdbdbd">
                     <div class="col-span-2">
                         <label for="first_name" class="block mb-1 ml-1 text-sm font-medium text-gray-900 dark:text-gray-300">Assigned Vendor</label>
-                        <select id="countries" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
-                            <option selected>Choose a country</option>
-                            <option value="US">United States</option>
-                            <option value="CA">Canada</option>
-                        </select>
+                        <SelectOption v-model="input" :data="select" placeholder="Select Vendor"/>
                     </div>
                     <div>
                         <label for="first_name" class="block mb-1 ml-1 text-sm font-medium text-gray-900 dark:text-gray-300">Attention Of</label>
@@ -36,11 +32,7 @@
                         <InputText v-model="input" placeholder="Enter Attention Of"/></div>
                     <div>
                         <label for="first_name" class="block mb-1 ml-1 text-sm font-medium text-gray-900 dark:text-gray-300">Invoice To</label>
-                        <select id="countries" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
-                            <option selected>Choose a country</option>
-                            <option value="US">United States</option>
-                            <option value="CA">Canada</option>
-                        </select>
+                        <SelectOption v-model="input" :data="select" placeholder="Select Vendor"/>
                     </div>
                     <div class="col-span-5">
                         <label for="first_name" class="block mb-1 ml-1 text-sm font-medium text-gray-900 dark:text-gray-300">Vendor Address</label>
@@ -50,19 +42,11 @@
                 <div class="grid  gap-x-2 gap-y-5 grid-cols-1">
                     <div>
                         <label for="first_name" class="block mb-1 ml-1 text-sm font-medium text-gray-900 dark:text-gray-300">Customer - Contract</label>
-                        <select id="countries" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
-                            <option selected>Choose a country</option>
-                            <option value="US">United States</option>
-                            <option value="CA">Canada</option>
-                        </select>
+                        <SelectOption v-model="input" :data="select" placeholder="Select Vendor"/>
                     </div>
                     <div>
                         <label for="first_name" class="block mb-1 ml-1 text-sm font-medium text-gray-900 dark:text-gray-300">Customer PO No.</label>   
-                        <select id="countries" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
-                            <option selected>Choose a country</option>
-                            <option value="US">United States</option>
-                            <option value="CA">Canada</option>
-                        </select>
+                        <SelectOption v-model="input" :data="select" placeholder="Select Vendor"/>
                     </div>
                 </div>
             </div>
@@ -93,10 +77,7 @@
                                 <InputNumber v-model="cost_detail.quantity" placeholder="Enter Attention Of"/>
                             </td>
                             <td class="px-6 py-4 whitespace-nowrap text-gray-900">
-                                <select v-model="cost_detail.uom" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-white dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
-                                    <option value="SHP" class="p-2">SHP</option>
-                                    <option value="HVS">HVS</option>
-                                </select>
+                                <SelectOption v-model="cost_detail.uom" :data="select" placeholder="Select Vendor"/>
                             </td>
                             <td class="px-6 py-4 whitespace-nowrap text-gray-900">
                                 <InputNumber v-model="cost_detail.unit_price" placeholder="Enter Attention Of"/>
@@ -109,10 +90,7 @@
                                 <InputNumber v-model="cost_detail.vat" placeholder="Enter Attention Of"/>
                             </td>
                             <td class="px-6 py-4 whitespace-nowrap text-gray-900">
-                                <select id="countries" v-model="cost_detail.currency" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
-                                    <option value="USD">USD</option>
-                                    <option value="AED">AED</option>
-                                </select>
+                                <SelectOption v-model="cost_detail.currency" :data="select" placeholder="Select Vendor"/>
                             </td>
                             <td class="px-6 py-4 whitespace-nowrap text-gray-900">
                                 {{VATAmount(Subtotal(cost_detail.quantity,cost_detail.unit_price,cost_detail.discount), cost_detail.vat)}}
@@ -124,10 +102,7 @@
                                 {{Total(Subtotal(cost_detail.quantity,cost_detail.unit_price,cost_detail.discount),VATAmount(Subtotal(cost_detail.quantity,cost_detail.unit_price,cost_detail.discount), cost_detail.vat))}}
                             </td>
                             <td class="px-6 py-4 whitespace-nowrap text-gray-900">
-                                <select id="countries" v-model="cost_detail.charge_to" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
-                                    <option value="USD">USD</option>
-                                    <option value="AED">AED</option>
-                                </select>
+                                <SelectOption v-model="cost_detail.charge_to" :data="select" placeholder="Select Vendor"/>
                             </td>
                             <td class="px-6 py-4 whitespace-nowrap text-gray-900">
                                 <button @click="remove(index)">Remove</button>
@@ -176,16 +151,24 @@
 <script>
 import InputText from '../components/InputText.component.vue'
 import InputNumber from '../components/InputNumber.component.vue'
-
+import SelectOption from '../components/SelectOption.component.vue'
 export default {
     name: 'form-instruction',
     components: {
         InputText,
-        InputNumber
+        InputNumber,
+        SelectOption
     },
     data(){
         return{
             input: '',
+            select: [{
+                id: '1',
+                name: 'aku'
+            },{
+                id: '2',
+                name: 'iya'
+            }],
             HeaderTable: ["Description","Qty","UOM","Unit Price","Discount(%)","VAT(%)","Currency","VAT Amount","Sub Total", "Total","Charge To"],
             cost_details:[
                 {
