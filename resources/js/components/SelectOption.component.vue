@@ -18,7 +18,9 @@
                         dark:placeholder-gray-400 
                         dark:text-white 
                         dark:focus:ring-blue-500 
-                        dark:focus:border-blue-500">
+                        dark:focus:border-blue-500"
+                    :class="{'w-40': small,'w-16': extrasmall, 'w-full': fullwidth, 'w-48': large}"
+                    >
                 <option value="" disabled selected hidden>{{placeholder}}</option>
                 <option v-for="item in data" :value="item.name" :key="item.id">{{item.name}}</option>
         </select>
@@ -28,7 +30,15 @@
 <script>
 export default {
  name: 'SelectOption',
- props: ["value","data","placeholder"],
+ props: {
+    value: String,
+    data: Array,
+    placeholder: String,
+    small: Boolean,
+    extrasmall:Boolean,
+    large: Boolean,
+    fullwidth: Boolean
+ },
  data(){
     return{
 

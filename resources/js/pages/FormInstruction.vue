@@ -25,34 +25,34 @@
                     </div>
                     <div>
                         <label for="first_name" class="block mb-1 ml-1 text-sm font-medium text-gray-900 dark:text-gray-300">Attention Of</label>
-                        <InputText v-model="input" placeholder="Enter Attention Of"/>
+                        <InputText small v-model="input" placeholder="Enter Attention Of"/>
                     </div>
                     <div>
                         <label for="first_name" class="block mb-1 ml-1 text-sm font-medium text-gray-900 dark:text-gray-300">Quotation No.</label>
-                        <InputText v-model="input" placeholder="Enter Attention Of"/></div>
+                        <InputText small v-model="input" placeholder="Enter Quotation No."/></div>
                     <div>
                         <label for="first_name" class="block mb-1 ml-1 text-sm font-medium text-gray-900 dark:text-gray-300">Invoice To</label>
-                        <SelectOption v-model="input" :data="select" placeholder="Select Vendor"/>
+                        <SelectOption small v-model="input" :data="select" placeholder="Select Invoice To."/>
                     </div>
                     <div class="col-span-5">
                         <label for="first_name" class="block mb-1 ml-1 text-sm font-medium text-gray-900 dark:text-gray-300">Vendor Address</label>
-                        <InputText v-model="input" placeholder="Enter Attention Of"/>
+                        <InputText fullwidth v-model="input" placeholder="Enter Vendor Address"/>
                     </div>
                 </div>
                 <div class="grid  gap-x-2 gap-y-5 grid-cols-1">
                     <div>
                         <label for="first_name" class="block mb-1 ml-1 text-sm font-medium text-gray-900 dark:text-gray-300">Customer - Contract</label>
-                        <SelectOption v-model="input" :data="select" placeholder="Select Vendor"/>
+                        <SelectOption large v-model="input" :data="select" placeholder="Select Customer"/>
                     </div>
                     <div>
                         <label for="first_name" class="block mb-1 ml-1 text-sm font-medium text-gray-900 dark:text-gray-300">Customer PO No.</label>   
-                        <SelectOption v-model="input" :data="select" placeholder="Select Vendor"/>
+                        <SelectOption large v-model="input" :data="select" placeholder="Select Customer PO No."/>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-    <div class="container mt-5">
+    <div class="mx-auto mt-5">
         <h1> Cost Detail</h1>
         <div class="relative overflow-x-auto  sm:rounded-lg">
             <table class="w-full text-xxs text-left text-gray-500 dark:text-gray-400">
@@ -71,26 +71,26 @@
                 <tbody>
                     <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700" v-for="(cost_detail,index) in cost_details" :key="index">
                             <td class="px-6 py-4 whitespace-nowrap text-gray-900">
-                                <InputText v-model="cost_detail.description" placeholder="Enter Attention Of"/>
+                                <InputText extrasmall v-model="cost_detail.description" placeholder="Enter Description"/>
                             </td>    
                             <td class="px-6 py-4 whitespace-nowrap text-gray-900">
-                                <InputNumber v-model="cost_detail.quantity" placeholder="Enter Attention Of"/>
+                                <InputNumber small v-model="cost_detail.quantity" placeholder="Enter Attention Of"/>
                             </td>
                             <td class="px-6 py-4 whitespace-nowrap text-gray-900">
-                                <SelectOption v-model="cost_detail.uom" :data="select" placeholder="Select Vendor"/>
+                                <SelectOption extrasmall v-model="cost_detail.uom" :data="select"/>
                             </td>
                             <td class="px-6 py-4 whitespace-nowrap text-gray-900">
-                                <InputNumber v-model="cost_detail.unit_price" placeholder="Enter Attention Of"/>
+                                <InputNumber extrasmall v-model="cost_detail.unit_price"/>
                             </td>
                             <td class="px-6 py-4 whitespace-nowrap text-gray-900">
-                                <InputNumber persen v-model="cost_detail.discount" placeholder="Enter Attention Of"/>
+                                <InputNumber small persen v-model="cost_detail.discount"/>
                             
                             </td>
                             <td class="px-6 py-4 whitespace-nowrap text-gray-900">
-                                <InputNumber v-model="cost_detail.vat" placeholder="Enter Attention Of"/>
+                                <InputNumber small v-model="cost_detail.vat"/>
                             </td>
                             <td class="px-6 py-4 whitespace-nowrap text-gray-900">
-                                <SelectOption v-model="cost_detail.currency" :data="select" placeholder="Select Vendor"/>
+                                <SelectOption extrasmall v-model="cost_detail.currency" :data="select"/>
                             </td>
                             <td class="px-6 py-4 whitespace-nowrap text-gray-900">
                                 {{VATAmount(Subtotal(cost_detail.quantity,cost_detail.unit_price,cost_detail.discount), cost_detail.vat)}}
@@ -102,7 +102,7 @@
                                 {{Total(Subtotal(cost_detail.quantity,cost_detail.unit_price,cost_detail.discount),VATAmount(Subtotal(cost_detail.quantity,cost_detail.unit_price,cost_detail.discount), cost_detail.vat))}}
                             </td>
                             <td class="px-6 py-4 whitespace-nowrap text-gray-900">
-                                <SelectOption v-model="cost_detail.charge_to" :data="select" placeholder="Select Vendor"/>
+                                <SelectOption fullwidth v-model="cost_detail.charge_to" :data="select" placeholder="Select Vendor"/>
                             </td>
                             <td class="px-6 py-4 whitespace-nowrap text-gray-900">
                                 <button @click="remove(index)">Remove</button>
@@ -172,14 +172,14 @@ export default {
             HeaderTable: ["Description","Qty","UOM","Unit Price","Discount(%)","VAT(%)","Currency","VAT Amount","Sub Total", "Total","Charge To"],
             cost_details:[
                 {
-                    description: '',
-                    quantity: "",
-                    uom: '',
-                    unit_price: "",
-                    discount: "",
-                    vat: "",
-                    currency: '',
-                    charge_to: ''
+                    description: "",
+                    quantity: "0",
+                    uom: "",
+                    unit_price: "0",
+                    discount: "0",
+                    vat: "0",
+                    currency: "",
+                    charge_to: ""
                 }
             ]
         }
@@ -190,14 +190,14 @@ export default {
         },
         addRow: function(){
             this.cost_details.push({
-                    description: '',
-                    quantity: '',
-                    uom: '',
-                    unit_price: '',
-                    discount: '0',
-                    vat: '0',
-                    currency: '',
-                    charge_to: ''
+                    description: "",
+                    quantity: "0",
+                    uom: "",
+                    unit_price: "0",
+                    discount: "0",
+                    vat: "0",
+                    currency: "",
+                    charge_to: ""
                 })
         },
         Subtotal: function(qty,unit_price,discount){
