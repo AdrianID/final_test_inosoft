@@ -17616,6 +17616,12 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
+//
+//
+//
+//
+//
 
 
 
@@ -17651,10 +17657,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
           discount: "0",
           vat: "0",
           currency: "",
-          charge_to: "",
-          total: "0",
-          sub_total: "0",
-          vat_amount: "0"
+          charge_to: ""
         }]
       }
     };
@@ -20315,65 +20318,75 @@ var render = function () {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c(
-    "div",
-    { staticClass: "mx-auto bg-white p-14" },
-    [
-      _c("Title", [_vm._v("3rd Party Instruction")]),
-      _vm._v(" "),
-      _c("Vendor", {
-        attrs: {
-          datas: _vm.data.vendor,
-          dataVendor: _vm.dataVendor,
-          dataInvoice: _vm.dataInvoice,
-          dataCustomer: _vm.dataCustomer,
-          dataCustomerPO: _vm.dataCustomerPO,
-        },
-        on: {
-          "update:datas": function (newValue) {
-            return (_vm.data.vendor = newValue)
+  return _c("div", { staticClass: "mx-auto bg-white p-14" }, [
+    _c(
+      "div",
+      { staticClass: "mb-5" },
+      [_c("Title", [_vm._v("3rd Party Instruction")])],
+      1
+    ),
+    _vm._v(" "),
+    _c(
+      "div",
+      [
+        _c("Vendor", {
+          attrs: {
+            datas: _vm.data.vendor,
+            dataVendor: _vm.dataVendor,
+            dataInvoice: _vm.dataInvoice,
+            dataCustomer: _vm.dataCustomer,
+            dataCustomerPO: _vm.dataCustomerPO,
           },
-        },
-      }),
-      _vm._v(" "),
-      _c("CostDetail", {
-        attrs: {
-          datas: _vm.data.cost_details,
-          dataUOM: _vm.dataUOM,
-          dataCurrency: _vm.dataCurrency,
-          dataChargeTo: _vm.dataChargeTo,
-          HeaderTable: _vm.HeaderTable,
-        },
-        on: {
-          "update:datas": function (newValue) {
-            return (_vm.data.cost_details = newValue)
+          on: {
+            "update:datas": function (newValue) {
+              return (_vm.data.vendor = newValue)
+            },
           },
-        },
-      }),
-      _vm._v(" "),
-      _c("div", { staticClass: "mx-auto mt-8" }, [
-        _c(
-          "div",
-          { staticClass: "text-right" },
-          [
-            _c("Button", { attrs: { text: "", large: "" } }, [
-              _vm._v("Cancel"),
-            ]),
-            _vm._v(" "),
-            _c("Button", { attrs: { outlined: "", large: "" } }, [
-              _vm._v(" Save As Draft "),
-            ]),
-            _vm._v(" "),
-            _c("Button", { attrs: { primary: "", large: "" } }, [
-              _vm._v("Submit"),
-            ]),
-          ],
-          1
-        ),
-      ]),
-    ],
-    1
-  )
+        }),
+      ],
+      1
+    ),
+    _vm._v(" "),
+    _c(
+      "div",
+      [
+        _c("CostDetail", {
+          attrs: {
+            datas: _vm.data.cost_details,
+            dataUOM: _vm.dataUOM,
+            dataCurrency: _vm.dataCurrency,
+            dataChargeTo: _vm.dataChargeTo,
+            HeaderTable: _vm.HeaderTable,
+          },
+          on: {
+            "update:datas": function (newValue) {
+              return (_vm.data.cost_details = newValue)
+            },
+          },
+        }),
+      ],
+      1
+    ),
+    _vm._v(" "),
+    _c("div", { staticClass: "mx-auto mt-8" }, [
+      _c(
+        "div",
+        { staticClass: "text-right" },
+        [
+          _c("Button", { attrs: { text: "", large: "" } }, [_vm._v("Cancel")]),
+          _vm._v(" "),
+          _c("Button", { attrs: { outlined: "", large: "" } }, [
+            _vm._v(" Save As Draft "),
+          ]),
+          _vm._v(" "),
+          _c("Button", { attrs: { primary: "", large: "" } }, [
+            _vm._v("Submit"),
+          ]),
+        ],
+        1
+      ),
+    ]),
+  ])
 }
 var staticRenderFns = []
 render._withStripped = true
