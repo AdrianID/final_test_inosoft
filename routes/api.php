@@ -17,3 +17,7 @@ use Illuminate\Support\Facades\Route;
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
+
+Route::get('getUOM','App\Http\Controllers\TransactionController@getUOM');
+Route::get('getCurrency','App\Http\Controllers\TransactionController@getCurrency');
+Route::get('getChargeTo','App\Http\Controllers\TransactionController@getChargeTo');

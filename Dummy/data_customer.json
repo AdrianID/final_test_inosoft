@@ -1,0 +1,22 @@
+[
+    {
+        "id": 1,
+        "name": "ADNOC - ONSHORE",
+        "customer_po_no": [
+            {
+                "id": 1,
+                "name": "A123XXHTA0192"
+            }
+        ]
+    },
+    {
+        "id": 2,
+        "name": "ADNOC - OREONSH",
+        "customer_po_no": [
+            {
+                "id": 1,
+                "name": "HTA0192A123XX"
+            }
+        ]
+    }
+]
