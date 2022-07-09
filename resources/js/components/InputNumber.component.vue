@@ -1,5 +1,6 @@
 <template>
         <div>
+            <PopValidate :isError="isError" :error="error"/>
             <input  
                 v-bind:value="value"
                 v-on:input="$emit('input', $event.target.value)"
@@ -25,7 +26,11 @@
 </template>
 
 <script>
+import PopValidate from './PopValidate.component.vue'
 export default {
+    components:{
+        PopValidate
+    },
     props:{
         value: String,
         placeholder: String,
@@ -35,6 +40,35 @@ export default {
         fullwidth: Boolean
     },
     name: 'InputNumber',
+    data(){
+        return{
+            isError: false,
+            error: ''
+        }
+    },
+    watch: {
+        value(newValue){
+            if(newValue < 0 ){
+                this.error = 'Value must be greater than 0!',
+                this.isError = true
+            }else if(newValue.length == 0){
+                this.error = 'Field is required!',
+                this.isError = true
+            }else if(this.isPercent){
+                if(newValue > 100){
+                    this.error = 'Value can not be more than 100!',
+                    this.isError = true
+                }else{
+                    this.isError = false
+                }
+            }else if(!parseInt(newValue) && newValue != 0){
+                this.error = 'Value must be Number!',
+                this.isError = true
+            }else{
+                this.isError = false
+            }
+        }
+    }
 }
 </script>
 

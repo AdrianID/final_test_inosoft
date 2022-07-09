@@ -17257,32 +17257,131 @@ __webpack_require__.r(__webpack_exports__);
       set: function set(value) {
         this.$emit('update:datas', value);
       }
+    },
+    SubTotal: function SubTotal() {
+      var _this = this;
+
+      return function (index) {
+        var data = _this.data[index];
+        var total = data.quantity * data.unit_price - data.quantity * data.unit_price * (data.discount / 100);
+        _this.data[index].sub_total = total;
+        return total;
+      };
+    },
+    VATAmount: function VATAmount() {
+      var _this2 = this;
+
+      return function (index) {
+        var data = _this2.data[index];
+        var total = data.sub_total * (data.vat / 100);
+        _this2.data[index].vat_amount = total;
+        return total;
+      };
+    },
+    Total: function Total() {
+      var _this3 = this;
+
+      return function (index) {
+        var data = _this3.data[index];
+        var total = data.sub_total + data.vat_amount;
+        _this3.data[index].total = total;
+        return total;
+      };
+    },
+    TotalUSD: function TotalUSD() {
+      var _this4 = this;
+
+      var data = this.data.map(function (item) {
+        var temp = Object.assign({}, item);
+
+        if (temp.currency == 'AED') {
+          temp.sub_total = _this4.convertUSD(temp.sub_total);
+          temp.vat_amount = _this4.convertUSD(temp.vat_amount);
+          temp.total = _this4.convertUSD(temp.total);
+        }
+
+        return temp;
+      });
+      return data;
+    },
+    TotalAED: function TotalAED() {
+      var _this5 = this;
+
+      var data = this.data.map(function (item) {
+        var temp = Object.assign({}, item);
+
+        if (temp.currency == 'USD') {
+          temp.sub_total = _this5.convertAED(temp.sub_total);
+          temp.vat_amount = _this5.convertAED(temp.vat_amount);
+          temp.total = _this5.convertAED(temp.total);
+        }
+
+        return temp;
+      });
+      return data;
+    },
+    SubTotalUSD: function SubTotalUSD() {
+      return this.TotalUSD.reduce(function (n, _ref) {
+        var sub_total = _ref.sub_total;
+        return n + sub_total;
+      }, 0);
+    },
+    VATAmountUSD: function VATAmountUSD() {
+      return this.TotalUSD.reduce(function (n, _ref2) {
+        var vat_amount = _ref2.vat_amount;
+        return n + vat_amount;
+      }, 0);
+    },
+    totalUSD: function totalUSD() {
+      return this.TotalUSD.reduce(function (n, _ref3) {
+        var total = _ref3.total;
+        return n + total;
+      }, 0);
+    },
+    SubTotalAED: function SubTotalAED() {
+      return this.TotalAED.reduce(function (n, _ref4) {
+        var sub_total = _ref4.sub_total;
+        return n + sub_total;
+      }, 0);
+    },
+    VATAmountAED: function VATAmountAED() {
+      return this.TotalAED.reduce(function (n, _ref5) {
+        var vat_amount = _ref5.vat_amount;
+        return n + vat_amount;
+      }, 0);
+    },
+    totalAED: function totalAED() {
+      return this.TotalAED.reduce(function (n, _ref6) {
+        var total = _ref6.total;
+        return n + total;
+      }, 0);
     }
   },
   methods: {
     remove: function remove(index) {
-      this.data.cost_details.splice(index, 1);
+      this.data.splice(index, 1);
     },
     addRow: function addRow() {
-      this.data.cost_details.push({
+      console.log(this.TotalPriceUSD);
+      this.data.push({
         description: "",
         quantity: "0",
-        uom: "",
+        uom: "SHP",
         unit_price: "0",
         discount: "0",
         vat: "0",
-        currency: "",
-        charge_to: ""
+        currency: "USD",
+        charge_to: "",
+        sub_total: "0",
+        vat_amount: "0",
+        total: "0"
       });
     },
-    Subtotal: function Subtotal(qty, unit_price, discount) {
-      return qty * unit_price - qty * unit_price * (discount / 100);
+    convertUSD: function convertUSD(value) {
+      return value * 3.6725;
     },
-    VATAmount: function VATAmount(sub_total, vat) {
-      return sub_total * (vat / 100);
-    },
-    Total: function Total(sub_total, vat_amount) {
-      return sub_total + vat_amount;
+    convertAED: function convertAED(value) {
+      return value * 0.27;
     }
   }
 });
@@ -17292,6 +17391,158 @@ __webpack_require__.r(__webpack_exports__);
 /***/ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/InputNumber.component.vue?vue&type=script&lang=js&":
 /*!****************************************************************************************************************************************************************************************************************************!*\
   !*** ./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/InputNumber.component.vue?vue&type=script&lang=js& ***!
+  \****************************************************************************************************************************************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _PopValidate_component_vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./PopValidate.component.vue */ "./resources/js/components/PopValidate.component.vue");
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
+  components: {
+    PopValidate: _PopValidate_component_vue__WEBPACK_IMPORTED_MODULE_0__["default"]
+  },
+  props: {
+    value: String,
+    placeholder: String,
+    isPercent: Boolean,
+    small: Boolean,
+    extrasmall: Boolean,
+    fullwidth: Boolean
+  },
+  name: 'InputNumber',
+  data: function data() {
+    return {
+      isError: false,
+      error: ''
+    };
+  },
+  watch: {
+    value: function value(newValue) {
+      if (newValue < 0) {
+        this.error = 'Value must be greater than 0!', this.isError = true;
+      } else if (newValue.length == 0) {
+        this.error = 'Field is required!', this.isError = true;
+      } else if (this.isPercent) {
+        if (newValue > 100) {
+          this.error = 'Value can not be more than 100!', this.isError = true;
+        } else {
+          this.isError = false;
+        }
+      } else if (!parseInt(newValue) && newValue != 0) {
+        this.error = 'Value must be Number!', this.isError = true;
+      } else {
+        this.isError = false;
+      }
+    }
+  }
+});
+
+/***/ }),
+
+/***/ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/InputText.component.vue?vue&type=script&lang=js&":
+/*!**************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/InputText.component.vue?vue&type=script&lang=js& ***!
+  \**************************************************************************************************************************************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _PopValidate_component_vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./PopValidate.component.vue */ "./resources/js/components/PopValidate.component.vue");
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
+  name: 'InputText',
+  props: {
+    value: String,
+    placeholder: String,
+    small: Boolean,
+    extrasmall: Boolean,
+    fullwidth: Boolean
+  },
+  components: {
+    PopValidate: _PopValidate_component_vue__WEBPACK_IMPORTED_MODULE_0__["default"]
+  },
+  data: function data() {
+    return {
+      error: '',
+      isError: false
+    };
+  },
+  watch: {
+    value: function value(newValue) {
+      if (newValue.length == 0) {
+        this.error = 'Field is required!', this.isError = true;
+      } else {
+        this.isError = false;
+      }
+    }
+  }
+});
+
+/***/ }),
+
+/***/ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/PopValidate.component.vue?vue&type=script&lang=js&":
+/*!****************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/PopValidate.component.vue?vue&type=script&lang=js& ***!
   \****************************************************************************************************************************************************************************************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
@@ -17311,80 +17562,9 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
-  props: {
-    value: String,
-    placeholder: String,
-    isPercent: Boolean,
-    small: Boolean,
-    extrasmall: Boolean,
-    fullwidth: Boolean
-  },
-  name: 'InputNumber'
-});
-
-/***/ }),
-
-/***/ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/InputText.component.vue?vue&type=script&lang=js&":
-/*!**************************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/InputText.component.vue?vue&type=script&lang=js& ***!
-  \**************************************************************************************************************************************************************************************************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
-/* harmony export */ });
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
-  props: {
-    value: String,
-    placeholder: String,
-    small: Boolean,
-    extrasmall: Boolean,
-    fullwidth: Boolean
-  },
-  name: 'InputText'
+  name: 'PopValidate',
+  props: ["isError", "error"]
 });
 
 /***/ }),
@@ -17400,6 +17580,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
+/* harmony import */ var _PopValidate_component_vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./PopValidate.component.vue */ "./resources/js/components/PopValidate.component.vue");
 //
 //
 //
@@ -17429,6 +17610,8 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   name: 'SelectOption',
   props: {
@@ -17439,6 +17622,25 @@ __webpack_require__.r(__webpack_exports__);
     extrasmall: Boolean,
     large: Boolean,
     fullwidth: Boolean
+  },
+  components: {
+    PopValidate: _PopValidate_component_vue__WEBPACK_IMPORTED_MODULE_0__["default"]
+  },
+  data: function data() {
+    return {
+      isError: false,
+      error: ''
+    };
+  },
+  watch: {
+    value: function value(newValue) {
+      if (newValue.length == 0 || newValue == "") {
+        this.error = 'This Option Must Be Selected!';
+        this.isError = true;
+      } else {
+        this.error = false;
+      }
+    }
   }
 });
 
@@ -17649,12 +17851,15 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
         cost_details: [{
           description: "",
           quantity: "0",
-          uom: "",
+          uom: "SHP",
           unit_price: "0",
           discount: "0",
           vat: "0",
-          currency: "",
-          charge_to: ""
+          currency: "USD",
+          charge_to: "",
+          sub_total: "0",
+          vat_amount: "0",
+          total: "0"
         }]
       }
     };
@@ -18838,6 +19043,45 @@ component.options.__file = "resources/js/components/InputText.component.vue"
 
 /***/ }),
 
+/***/ "./resources/js/components/PopValidate.component.vue":
+/*!***********************************************************!*\
+  !*** ./resources/js/components/PopValidate.component.vue ***!
+  \***********************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _PopValidate_component_vue_vue_type_template_id_36ca25fb___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./PopValidate.component.vue?vue&type=template&id=36ca25fb& */ "./resources/js/components/PopValidate.component.vue?vue&type=template&id=36ca25fb&");
+/* harmony import */ var _PopValidate_component_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./PopValidate.component.vue?vue&type=script&lang=js& */ "./resources/js/components/PopValidate.component.vue?vue&type=script&lang=js&");
+/* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! !../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+
+
+
+
+/* normalize component */
+;
+var component = (0,_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
+  _PopValidate_component_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _PopValidate_component_vue_vue_type_template_id_36ca25fb___WEBPACK_IMPORTED_MODULE_0__.render,
+  _PopValidate_component_vue_vue_type_template_id_36ca25fb___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns,
+  false,
+  null,
+  null,
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "resources/js/components/PopValidate.component.vue"
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (component.exports);
+
+/***/ }),
+
 /***/ "./resources/js/components/SelectOption.component.vue":
 /*!************************************************************!*\
   !*** ./resources/js/components/SelectOption.component.vue ***!
@@ -19060,6 +19304,22 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./resources/js/components/PopValidate.component.vue?vue&type=script&lang=js&":
+/*!************************************************************************************!*\
+  !*** ./resources/js/components/PopValidate.component.vue?vue&type=script&lang=js& ***!
+  \************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_0_rules_0_use_0_node_modules_vue_loader_lib_index_js_vue_loader_options_PopValidate_component_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./PopValidate.component.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/PopValidate.component.vue?vue&type=script&lang=js&");
+ /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (_node_modules_babel_loader_lib_index_js_clonedRuleSet_5_0_rules_0_use_0_node_modules_vue_loader_lib_index_js_vue_loader_options_PopValidate_component_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+
+/***/ }),
+
 /***/ "./resources/js/components/SelectOption.component.vue?vue&type=script&lang=js&":
 /*!*************************************************************************************!*\
   !*** ./resources/js/components/SelectOption.component.vue?vue&type=script&lang=js& ***!
@@ -19227,6 +19487,23 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "staticRenderFns": () => (/* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_InputText_component_vue_vue_type_template_id_34e6d26a___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns)
 /* harmony export */ });
 /* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_InputText_component_vue_vue_type_template_id_34e6d26a___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./InputText.component.vue?vue&type=template&id=34e6d26a& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/InputText.component.vue?vue&type=template&id=34e6d26a&");
+
+
+/***/ }),
+
+/***/ "./resources/js/components/PopValidate.component.vue?vue&type=template&id=36ca25fb&":
+/*!******************************************************************************************!*\
+  !*** ./resources/js/components/PopValidate.component.vue?vue&type=template&id=36ca25fb& ***!
+  \******************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "render": () => (/* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_PopValidate_component_vue_vue_type_template_id_36ca25fb___WEBPACK_IMPORTED_MODULE_0__.render),
+/* harmony export */   "staticRenderFns": () => (/* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_PopValidate_component_vue_vue_type_template_id_36ca25fb___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns)
+/* harmony export */ });
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_PopValidate_component_vue_vue_type_template_id_36ca25fb___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./PopValidate.component.vue?vue&type=template&id=36ca25fb& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/PopValidate.component.vue?vue&type=template&id=36ca25fb&");
 
 
 /***/ }),
@@ -19527,7 +19804,7 @@ var render = function () {
                         },
                         [
                           _c("InputNumber", {
-                            attrs: { small: "", persen: "" },
+                            attrs: { small: "", isPercent: "" },
                             model: {
                               value: cost_detail.discount,
                               callback: function ($$v) {
@@ -19548,7 +19825,7 @@ var render = function () {
                         },
                         [
                           _c("InputNumber", {
-                            attrs: { small: "" },
+                            attrs: { small: "", isPercent: "" },
                             model: {
                               value: cost_detail.vat,
                               callback: function ($$v) {
@@ -19591,16 +19868,7 @@ var render = function () {
                         [
                           _vm._v(
                             "\r\n                                " +
-                              _vm._s(
-                                _vm.VATAmount(
-                                  _vm.Subtotal(
-                                    cost_detail.quantity,
-                                    cost_detail.unit_price,
-                                    cost_detail.discount
-                                  ),
-                                  cost_detail.vat
-                                )
-                              ) +
+                              _vm._s(_vm.VATAmount(index)) +
                               "\r\n                            "
                           ),
                         ]
@@ -19615,13 +19883,7 @@ var render = function () {
                         [
                           _vm._v(
                             "\r\n                                " +
-                              _vm._s(
-                                _vm.Subtotal(
-                                  cost_detail.quantity,
-                                  cost_detail.unit_price,
-                                  cost_detail.discount
-                                )
-                              ) +
+                              _vm._s(_vm.SubTotal(index)) +
                               "\r\n                            "
                           ),
                         ]
@@ -19636,23 +19898,7 @@ var render = function () {
                         [
                           _vm._v(
                             "\r\n                                " +
-                              _vm._s(
-                                _vm.Total(
-                                  _vm.Subtotal(
-                                    cost_detail.quantity,
-                                    cost_detail.unit_price,
-                                    cost_detail.discount
-                                  ),
-                                  _vm.VATAmount(
-                                    _vm.Subtotal(
-                                      cost_detail.quantity,
-                                      cost_detail.unit_price,
-                                      cost_detail.discount
-                                    ),
-                                    cost_detail.vat
-                                  )
-                                )
-                              ) +
+                              _vm._s(_vm.Total(index)) +
                               "\r\n                            "
                           ),
                         ]
@@ -19669,7 +19915,7 @@ var render = function () {
                             attrs: {
                               fullwidth: "",
                               data: _vm.dataChargeTo,
-                              placeholder: "Select Vendor",
+                              placeholder: "Select",
                             },
                             model: {
                               value: cost_detail.charge_to,
@@ -19735,29 +19981,63 @@ var render = function () {
                       ]
                     ),
                     _vm._v(" "),
-                    _c("td", { staticClass: "px-6 py-4" }, [
-                      _vm._v(
-                        "\r\n                            AED in Total\r\n                        "
-                      ),
-                    ]),
+                    _c(
+                      "td",
+                      {
+                        staticClass:
+                          "px-6 py-4 whitespace-nowrap text-gray-900",
+                      },
+                      [
+                        _vm._v(
+                          "\r\n                            AED in Total\r\n                        "
+                        ),
+                      ]
+                    ),
                     _vm._v(" "),
-                    _c("td", { staticClass: "px-6 py-4" }, [
-                      _vm._v(
-                        "\r\n                            0.00\r\n                        "
-                      ),
-                    ]),
+                    _c(
+                      "td",
+                      {
+                        staticClass:
+                          "px-6 py-4 whitespace-nowrap text-gray-900",
+                      },
+                      [
+                        _vm._v(
+                          "\r\n                            " +
+                            _vm._s(_vm.VATAmountAED) +
+                            "\r\n                        "
+                        ),
+                      ]
+                    ),
                     _vm._v(" "),
-                    _c("td", { staticClass: "px-6 py-4" }, [
-                      _vm._v(
-                        "\r\n                            0.00\r\n                        "
-                      ),
-                    ]),
+                    _c(
+                      "td",
+                      {
+                        staticClass:
+                          "px-6 py-4 whitespace-nowrap text-gray-900",
+                      },
+                      [
+                        _vm._v(
+                          "\r\n                            " +
+                            _vm._s(_vm.SubTotalAED) +
+                            "\r\n                        "
+                        ),
+                      ]
+                    ),
                     _vm._v(" "),
-                    _c("td", { staticClass: "px-6 py-4" }, [
-                      _vm._v(
-                        "\r\n                            0.00\r\n                        "
-                      ),
-                    ]),
+                    _c(
+                      "td",
+                      {
+                        staticClass:
+                          "px-6 py-4 whitespace-nowrap text-gray-900",
+                      },
+                      [
+                        _vm._v(
+                          "\r\n                            " +
+                            _vm._s(_vm.totalAED) +
+                            "\r\n                        "
+                        ),
+                      ]
+                    ),
                     _vm._v(" "),
                     _c(
                       "td",
@@ -19789,7 +20069,72 @@ var render = function () {
                   ]
                 ),
                 _vm._v(" "),
-                _vm._m(0),
+                _c(
+                  "tr",
+                  {
+                    staticClass:
+                      "bg-white border-b dark:bg-gray-800 dark:border-gray-700",
+                  },
+                  [
+                    _c(
+                      "td",
+                      {
+                        staticClass:
+                          "px-6 py-4 whitespace-nowrap text-gray-900",
+                      },
+                      [
+                        _vm._v(
+                          "\r\n                            USD in Total\r\n                        "
+                        ),
+                      ]
+                    ),
+                    _vm._v(" "),
+                    _c(
+                      "td",
+                      {
+                        staticClass:
+                          "px-6 py-4 whitespace-nowrap text-gray-900",
+                      },
+                      [
+                        _vm._v(
+                          "\r\n                            " +
+                            _vm._s(_vm.VATAmountUSD) +
+                            "\r\n                        "
+                        ),
+                      ]
+                    ),
+                    _vm._v(" "),
+                    _c(
+                      "td",
+                      {
+                        staticClass:
+                          "px-6 py-4 whitespace-nowrap text-gray-900",
+                      },
+                      [
+                        _vm._v(
+                          "\r\n                            " +
+                            _vm._s(_vm.SubTotalUSD) +
+                            "\r\n                        "
+                        ),
+                      ]
+                    ),
+                    _vm._v(" "),
+                    _c(
+                      "td",
+                      {
+                        staticClass:
+                          "px-6 py-4 whitespace-nowrap text-gray-900",
+                      },
+                      [
+                        _vm._v(
+                          "\r\n                            " +
+                            _vm._s(_vm.totalUSD) +
+                            "\r\n                        "
+                        ),
+                      ]
+                    ),
+                  ]
+                ),
               ],
               2
             ),
@@ -19800,44 +20145,7 @@ var render = function () {
     1
   )
 }
-var staticRenderFns = [
-  function () {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c(
-      "tr",
-      {
-        staticClass: "bg-white border-b dark:bg-gray-800 dark:border-gray-700",
-      },
-      [
-        _c("td", { staticClass: "px-6 py-4" }, [
-          _vm._v(
-            "\r\n                            USD in Total\r\n                        "
-          ),
-        ]),
-        _vm._v(" "),
-        _c("td", { staticClass: "px-6 py-4" }, [
-          _vm._v(
-            "\r\n                            0.00\r\n                        "
-          ),
-        ]),
-        _vm._v(" "),
-        _c("td", { staticClass: "px-6 py-4" }, [
-          _vm._v(
-            "\r\n                            0.00\r\n                        "
-          ),
-        ]),
-        _vm._v(" "),
-        _c("td", { staticClass: "px-6 py-4" }, [
-          _vm._v(
-            "\r\n                            0.00\r\n                        "
-          ),
-        ]),
-      ]
-    )
-  },
-]
+var staticRenderFns = []
 render._withStripped = true
 
 
@@ -19860,24 +20168,30 @@ var render = function () {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", [
-    _c("input", {
-      staticClass:
-        "bg-gray-50 border border-gray-300 text-gray-900 text-xs rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500",
-      class: {
-        "w-16": _vm.small,
-        "w-14": _vm.extrasmall,
-        "w-full": _vm.fullwidth,
-      },
-      attrs: { placeholder: _vm.placeholder },
-      domProps: { value: _vm.value },
-      on: {
-        input: function ($event) {
-          return _vm.$emit("input", $event.target.value)
+  return _c(
+    "div",
+    [
+      _c("PopValidate", { attrs: { isError: _vm.isError, error: _vm.error } }),
+      _vm._v(" "),
+      _c("input", {
+        staticClass:
+          "bg-gray-50 border border-gray-300 text-gray-900 text-xs rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500",
+        class: {
+          "w-16": _vm.small,
+          "w-14": _vm.extrasmall,
+          "w-full": _vm.fullwidth,
         },
-      },
-    }),
-  ])
+        attrs: { placeholder: _vm.placeholder },
+        domProps: { value: _vm.value },
+        on: {
+          input: function ($event) {
+            return _vm.$emit("input", $event.target.value)
+          },
+        },
+      }),
+    ],
+    1
+  )
 }
 var staticRenderFns = []
 render._withStripped = true
@@ -19902,24 +20216,86 @@ var render = function () {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", [
-    _c("input", {
-      staticClass:
-        "bg-gray-50 border border-gray-300 text-gray-900 text-xs rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500",
-      class: {
-        "w-40": _vm.small,
-        "w-32": _vm.extrasmall,
-        "w-full": _vm.fullwidth,
-      },
-      attrs: { type: "text", placeholder: _vm.placeholder },
-      domProps: { value: _vm.value },
-      on: {
-        input: function ($event) {
-          return _vm.$emit("input", $event.target.value)
+  return _c(
+    "div",
+    [
+      _c("PopValidate", { attrs: { error: _vm.error, isError: _vm.isError } }),
+      _vm._v(" "),
+      _c("input", {
+        staticClass:
+          "bg-gray-50 border border-gray-300 text-gray-900 text-xs rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500",
+        class: {
+          "w-40": _vm.small,
+          "w-32": _vm.extrasmall,
+          "w-full": _vm.fullwidth,
         },
-      },
-    }),
-  ])
+        attrs: { type: "text", placeholder: _vm.placeholder },
+        domProps: { value: _vm.value },
+        on: {
+          input: function ($event) {
+            return _vm.$emit("input", $event.target.value)
+          },
+        },
+      }),
+    ],
+    1
+  )
+}
+var staticRenderFns = []
+render._withStripped = true
+
+
+
+/***/ }),
+
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/PopValidate.component.vue?vue&type=template&id=36ca25fb&":
+/*!*********************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/PopValidate.component.vue?vue&type=template&id=36ca25fb& ***!
+  \*********************************************************************************************************************************************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "render": () => (/* binding */ render),
+/* harmony export */   "staticRenderFns": () => (/* binding */ staticRenderFns)
+/* harmony export */ });
+var render = function () {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _vm.isError
+    ? _c("div", { staticClass: "relative" }, [
+        _c(
+          "div",
+          {
+            staticClass:
+              "absolute top-0 p-2 -mt-1 text-sm leading-tight text-white transform -translate-y-full bg-orange-500 rounded-lg shadow-lg",
+          },
+          [_vm._v("\r\n            " + _vm._s(_vm.error) + "\r\n        ")]
+        ),
+        _vm._v(" "),
+        _c(
+          "svg",
+          {
+            staticClass:
+              "absolute z-10 w-6 h-6 text-orange-500 transform -translate-y-3 fill-current stroke-current",
+            attrs: { width: "8", height: "8" },
+          },
+          [
+            _c("rect", {
+              attrs: {
+                x: "12",
+                y: "-10",
+                width: "8",
+                height: "8",
+                transform: "rotate(45)",
+              },
+            }),
+          ]
+        ),
+      ])
+    : _vm._e()
 }
 var staticRenderFns = []
 render._withStripped = true
@@ -19944,43 +20320,49 @@ var render = function () {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", [
-    _c(
-      "select",
-      {
-        staticClass:
-          "bg-gray-50 border border-gray-300 text-gray-900 text-xs rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500",
-        class: {
-          "w-40": _vm.small,
-          "w-16": _vm.extrasmall,
-          "w-full": _vm.fullwidth,
-          "w-48": _vm.large,
-        },
-        domProps: { value: _vm.value },
-        on: {
-          input: function ($event) {
-            return _vm.$emit("input", $event.target.value)
+  return _c(
+    "div",
+    [
+      _c("PopValidate", { attrs: { error: _vm.error, isError: _vm.isError } }),
+      _vm._v(" "),
+      _c(
+        "select",
+        {
+          staticClass:
+            "bg-gray-50 border border-gray-300 text-gray-900 text-xs rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500",
+          class: {
+            "w-40": _vm.small,
+            "w-16": _vm.extrasmall,
+            "w-full": _vm.fullwidth,
+            "w-48": _vm.large,
+          },
+          domProps: { value: _vm.value },
+          on: {
+            input: function ($event) {
+              return _vm.$emit("input", $event.target.value)
+            },
           },
         },
-      },
-      [
-        _c(
-          "option",
-          { attrs: { value: "", disabled: "", selected: "", hidden: "" } },
-          [_vm._v(_vm._s(_vm.placeholder))]
-        ),
-        _vm._v(" "),
-        _vm._l(_vm.data, function (item) {
-          return _c(
+        [
+          _c(
             "option",
-            { key: item.id, domProps: { value: item.name } },
-            [_vm._v(_vm._s(item.name))]
-          )
-        }),
-      ],
-      2
-    ),
-  ])
+            { attrs: { value: "", disabled: "", selected: "", hidden: "" } },
+            [_vm._v(_vm._s(_vm.placeholder))]
+          ),
+          _vm._v(" "),
+          _vm._l(_vm.data, function (item) {
+            return _c(
+              "option",
+              { key: item.id, domProps: { value: item.name } },
+              [_vm._v(_vm._s(item.name))]
+            )
+          }),
+        ],
+        2
+      ),
+    ],
+    1
+  )
 }
 var staticRenderFns = []
 render._withStripped = true

@@ -1,5 +1,6 @@
 <template>
     <div>
+        <PopValidate :error="error" :isError="isError"/>
         <select v-bind:value="value"
                 v-on:input="$emit('input', $event.target.value)"
                 class=" bg-gray-50 
@@ -28,6 +29,7 @@
 </template>
 
 <script>
+import PopValidate from './PopValidate.component.vue'
 export default {
  name: 'SelectOption',
  props: {
@@ -38,6 +40,25 @@ export default {
     extrasmall:Boolean,
     large: Boolean,
     fullwidth: Boolean
+ },
+ components:{
+    PopValidate
+ },
+ data(){
+    return{
+        isError: false,
+        error: ''
+    }
+ },
+ watch:{
+    value(newValue){
+        if(newValue.length == 0 || newValue == ""){
+            this.error = 'This Option Must Be Selected!'
+            this.isError = true
+        }else{
+            this.error = false
+        }
+    }
  }
 }
 </script>

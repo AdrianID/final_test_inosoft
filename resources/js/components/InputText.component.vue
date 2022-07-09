@@ -1,5 +1,6 @@
 <template>
         <div>
+            <PopValidate :error="error" :isError="isError"/>
             <input  
                 v-bind:value="value"
                 v-on:input="$emit('input', $event.target.value)" 
@@ -24,7 +25,9 @@
 </template>
 
 <script>
+import PopValidate from './PopValidate.component.vue'
 export default {
+    name: 'InputText',
     props:{
         value: String,
         placeholder: String,
@@ -32,7 +35,25 @@ export default {
         extrasmall:Boolean,
         fullwidth: Boolean
     },
-    name: 'InputText',
+    components:{
+        PopValidate
+    },
+    data(){
+        return{
+            error: '',
+            isError: false
+        }
+    },
+    watch:{
+        value(newValue){
+            if(newValue.length == 0){
+                this.error = 'Field is required!',
+                this.isError = true
+            }else{
+                this.isError = false
+            }
+        }
+    }
 }
 </script>
 
