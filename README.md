@@ -29,26 +29,37 @@ To run this project, you must have npm. if not installed on your pc. Please foll
    ```sh
    git clone https://github.com/AdrianID/final_test_inosoft.git
    ```
+
 2. ```sh
    cd final_test_inosoft
    ```
+
 3. Install NPM packages
    ```sh
    npm install
    ```
+
 4. choose run npm with your own style
    ```sh
    npm run dev
    ```
    or
+
    ```sh
    npm run watch
    ```
    or
+
    ```sh
    npm run hot
    ```
+
 5. run the project
    ```sh
    php artisan serve
    ```
+
+[Vue.js]: https://img.shields.io/badge/Vue.js-35495E?style=for-the-badge&logo=vuedotjs&logoColor=4FC08D
+[Vue-url]: https://vuejs.org/
+[Laravel.com]: https://img.shields.io/badge/Laravel-FF2D20?style=for-the-badge&logo=laravel&logoColor=white
+[Laravel-url]: https://laravel.com
