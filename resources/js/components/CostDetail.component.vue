@@ -30,26 +30,26 @@
                                 <InputNumber extrasmall v-model="cost_detail.unit_price"/>
                             </td>
                             <td class="px-6 py-4 whitespace-nowrap text-gray-900">
-                                <InputNumber small persen v-model="cost_detail.discount"/>
+                                <InputNumber small isPercent v-model="cost_detail.discount"/>
                             
                             </td>
                             <td class="px-6 py-4 whitespace-nowrap text-gray-900">
-                                <InputNumber small v-model="cost_detail.vat"/>
+                                <InputNumber small isPercent v-model="cost_detail.vat"/>
                             </td>
                             <td class="px-6 py-4 whitespace-nowrap text-gray-900">
                                 <SelectOption extrasmall v-model="cost_detail.currency" :data="dataCurrency"/>
                             </td>
                             <td class="px-6 py-4 whitespace-nowrap text-gray-900">
-                                {{VATAmount(Subtotal(cost_detail.quantity,cost_detail.unit_price,cost_detail.discount), cost_detail.vat)}}
+                                {{VATAmount(index)}}
                             </td>
                             <td class="px-6 py-4 whitespace-nowrap text-gray-900">
-                                {{Subtotal(cost_detail.quantity,cost_detail.unit_price,cost_detail.discount)}}
+                                {{SubTotal(index)}}
                             </td>
                             <td class="px-6 py-4 whitespace-nowrap text-gray-900">
-                                {{Total(Subtotal(cost_detail.quantity,cost_detail.unit_price,cost_detail.discount),VATAmount(Subtotal(cost_detail.quantity,cost_detail.unit_price,cost_detail.discount), cost_detail.vat))}}
+                                {{Total(index)}}
                             </td>
                             <td class="px-6 py-4 whitespace-nowrap text-gray-900">
-                                <SelectOption fullwidth v-model="cost_detail.charge_to" :data="dataChargeTo" placeholder="Select Vendor"/>
+                                <SelectOption fullwidth v-model="cost_detail.charge_to" :data="dataChargeTo" placeholder="Select"/>
                             </td>
                             <td class="px-6 py-4 whitespace-nowrap text-gray-900">
                                 <Button small filled @button-click="remove(index)"><font-awesome-icon icon="fa-solid fa-minus"/> </Button>
@@ -60,17 +60,17 @@
                         <th scope="row" colspan="6" rowspan="2" class="px-6 py-4 font-medium text-gray-900 dark:text-white whitespace-nowrap">
                             Exchange Rate 1 USD = 3.6725 AED
                         </th>
-                        <td class="px-6 py-4" >
+                        <td class="px-6 py-4 whitespace-nowrap text-gray-900" >
                             AED in Total
                         </td>
-                        <td class="px-6 py-4" >
-                            0.00
+                        <td class="px-6 py-4 whitespace-nowrap text-gray-900" >
+                            {{VATAmountAED}}
                         </td>
-                        <td class="px-6 py-4">
-                            0.00
+                        <td class="px-6 py-4 whitespace-nowrap text-gray-900">
+                            {{SubTotalAED}}
                         </td>
-                        <td class="px-6 py-4">
-                            0.00
+                        <td class="px-6 py-4 whitespace-nowrap text-gray-900">
+                            {{totalAED}}
                         </td>
                         
                         <td class="px-6 py-4 text-right" rowspan="2" colspan="2">
@@ -78,17 +78,17 @@
                         </td>
                     </tr>
                     <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
-                        <td class="px-6 py-4" >
+                        <td class="px-6 py-4 whitespace-nowrap text-gray-900" >
                             USD in Total
                         </td>
-                        <td class="px-6 py-4" >
-                            0.00
+                        <td class="px-6 py-4 whitespace-nowrap text-gray-900" >
+                            {{VATAmountUSD}}
                         </td>
-                        <td class="px-6 py-4">
-                            0.00
+                        <td class="px-6 py-4 whitespace-nowrap text-gray-900">
+                            {{SubTotalUSD}}
                         </td>
-                        <td class="px-6 py-4">
-                            0.00
+                        <td class="px-6 py-4 whitespace-nowrap text-gray-900">
+                            {{totalUSD}}
                         </td>
                     </tr>
                 </tbody>
@@ -121,32 +121,100 @@ export default {
             set(value){
                 this.$emit('update:datas', value)
             }
+        },
+        SubTotal(){
+            return (index) => {
+                let data = this.data[index];
+                let total = ((data.quantity * data.unit_price) - (data.quantity * data.unit_price * (data.discount/100)))
+                this.data[index].sub_total = total;
+                return total
+            }
+        },
+        VATAmount(){
+            return (index) => {
+                let data = this.data[index];
+                let total = (data.sub_total  * (data.vat/100))
+                this.data[index].vat_amount = total;
+                return total
+            }
+        },
+        Total(){
+            return (index) => {
+                let data = this.data[index];
+                let total = (data.sub_total + data.vat_amount)
+                this.data[index].total = total;
+                return total
+            }
+        },
+        TotalUSD(){
+            let data = this.data.map(item => {
+	            let temp = Object.assign({}, item);
+                if(temp.currency == 'AED'){
+                    temp.sub_total = this.convertUSD(temp.sub_total);
+                    temp.vat_amount = this.convertUSD(temp.vat_amount)
+                    temp.total = this.convertUSD(temp.total)
+                }
+	            return temp;
+	        })
+            return data;
+        },
+        TotalAED(){
+            let data = this.data.map(item => {
+	            let temp = Object.assign({}, item);
+                if(temp.currency == 'USD'){
+                    temp.sub_total = this.convertAED(temp.sub_total);
+                    temp.vat_amount = this.convertAED(temp.vat_amount)
+                    temp.total = this.convertAED(temp.total)
+                }
+	            return temp;
+	        })
+            return data;
+        },
+        SubTotalUSD(){
+            return this.TotalUSD.reduce((n, {sub_total}) => n + sub_total, 0);
+        },
+        VATAmountUSD(){
+            return this.TotalUSD.reduce((n, {vat_amount}) => n + vat_amount, 0);
+        },
+        totalUSD(){
+            return this.TotalUSD.reduce((n, {total}) => n + total, 0);
+        },
+        
+        SubTotalAED(){
+            return this.TotalAED.reduce((n, {sub_total}) => n + sub_total, 0);
+        },
+        VATAmountAED(){
+            return this.TotalAED.reduce((n, {vat_amount}) => n + vat_amount, 0);
+        },
+        totalAED(){
+            return this.TotalAED.reduce((n, {total}) => n + total, 0);
         }
     },
     methods:{
         remove: function (index) {
-            this.data.cost_details.splice(index, 1);
+            this.data.splice(index, 1);
         },
         addRow: function(){
-            this.data.cost_details.push({
+            console.log(this.TotalPriceUSD);
+            this.data.push({
                     description: "",
                     quantity: "0",
-                    uom: "",
+                    uom: "SHP",
                     unit_price: "0",
                     discount: "0",
                     vat: "0",
-                    currency: "",
-                    charge_to: ""
+                    currency: "USD",
+                    charge_to: "",
+                    sub_total: "0",
+                    vat_amount: "0",
+                    total: "0"
                 })
         },
-        Subtotal: function(qty,unit_price,discount){
-            return ((qty * unit_price) - (qty * unit_price * (discount/100)));
+        convertUSD: function(value){
+            return value * 3.6725;
         },
-        VATAmount: function(sub_total,vat){
-            return (sub_total  * (vat/100))
-        },
-        Total: function(sub_total,vat_amount){
-            return (sub_total + vat_amount)
+        convertAED: function(value){
+            return value * 0.27;
         }
     }
 }

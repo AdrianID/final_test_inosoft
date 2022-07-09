@@ -51,12 +51,15 @@ export default {
                     {
                         description: "",
                         quantity: "0",
-                        uom: "",
+                        uom: "SHP",
                         unit_price: "0",
                         discount: "0",
                         vat: "0",
-                        currency: "",
-                        charge_to: ""
+                        currency: "USD",
+                        charge_to: "",
+                        sub_total: "0",
+                        vat_amount: "0",
+                        total: "0"
                     }
                 ]
             }
